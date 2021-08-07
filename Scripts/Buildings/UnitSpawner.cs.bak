@@ -83,7 +83,7 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
     {
         if(queuedUnits == maxUnitQueue){return;}
 
-        PlayerTD player = connectionToClient.identity.GetComponent<PlayerTD>();
+        PlayerRTS player = connectionToClient.identity.GetComponent<PlayerRTS>();
 
         if(player.GetResources() < unitPrefab.GetResourceCost()){return;};
 

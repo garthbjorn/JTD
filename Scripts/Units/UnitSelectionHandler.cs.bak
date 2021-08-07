@@ -9,7 +9,7 @@ public class UnitSelectionHandler : MonoBehaviour
     [SerializeField] private RectTransform unitSelectionArea = null;
 
     private Camera mainCamera;
-    private PlayerTD player;
+    private PlayerRTS player;
     private Vector2 startposition;
     public List<Unit> SelectedUnits {get;} = new List<Unit>();
 
@@ -34,7 +34,7 @@ public class UnitSelectionHandler : MonoBehaviour
             {
                 if(NetworkClient.connection.identity != null)
                 {
-                    player = NetworkClient.connection.identity.GetComponent<PlayerTD>();
+                    player = NetworkClient.connection.identity.GetComponent<PlayerRTS>();
                 }
             }
             

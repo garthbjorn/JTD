@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 
-public class PlayerRTS : NetworkBehaviour
+public class PlayerTD : NetworkBehaviour
 {
     [SerializeField] private Building[] buildings = new Building[0];
 

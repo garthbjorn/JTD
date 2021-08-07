@@ -15,7 +15,7 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     [SerializeField] private LayerMask floorMask = new LayerMask();
 
     private Camera mainCamera;
-    private PlayerTD player;
+    private PlayerRTS player;
     private GameObject buildingPreviewInstance;
     private Renderer buildingRendererInstance;
 
@@ -37,7 +37,7 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             {
                 if(NetworkClient.connection.identity != null)
                 {
-                    player = NetworkClient.connection.identity.GetComponent<PlayerTD>();
+                    player = NetworkClient.connection.identity.GetComponent<PlayerRTS>();
                 }
             }
             
