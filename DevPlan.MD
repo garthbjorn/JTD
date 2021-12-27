@@ -28,3 +28,8 @@ It has online multiplayer, infinite rounds, scaling enemies, and customizable to
 5. Scoring
     - Enemy scoring (health loss)
     - Player scoring (ememy kill)
+## Wanted Features
+- Leaderboards
+- Rewards
+- BATTLE PASS??
+- Link to Website?
