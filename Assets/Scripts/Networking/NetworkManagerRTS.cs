@@ -7,6 +7,10 @@ using UnityEngine.SceneManagement;
 public class NetworkManagerRTS : NetworkManager
 {
     [SerializeField] private GameObject enemyPrefab = null;
+    [SerializeField] private GameObject enemySpawnLocation = null;
+    [SerializeField] private GameObject enemyTarget = null;
+
+
     // [SerializeField] private GameOverHandler gameOverHandlerPrefab = null;
 
     public override void OnServerAddPlayer(NetworkConnection conn)
@@ -15,9 +19,11 @@ public class NetworkManagerRTS : NetworkManager
 
         GameObject enemyInstance = Instantiate(
             enemyPrefab, 
-            conn.identity.transform.position, 
-            conn.identity.transform.rotation);
+            enemySpawnLocation.transform.position, 
+            enemySpawnLocation.transform.rotation);
 
+            enemyInstance.GetComponent<Enemy>().enemyTarget = enemyTarget;
+            
             NetworkServer.Spawn(enemyInstance, conn);
     }
 

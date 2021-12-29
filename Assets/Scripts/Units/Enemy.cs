@@ -13,7 +13,7 @@ public class Enemy : NetworkBehaviour
     [SerializeField] private Targeter targeter = null;
     [SerializeField] private UnityEvent onSelected = null;
     [SerializeField] private UnityEvent onDeselected = null;
-
+    public GameObject enemyTarget = null;
     public static event Action<Enemy> ServerOnUnitSpawned;
     public static event Action<Enemy> ServerOnUnitDespawned;
 
@@ -41,6 +41,7 @@ public class Enemy : NetworkBehaviour
     {
         health.ServerOnDie += ServerHandleDie;
         ServerOnUnitSpawned?.Invoke(this);
+        targeter.CmdSetTarget(enemyTarget);
     }
 
     public override void OnStopServer()
