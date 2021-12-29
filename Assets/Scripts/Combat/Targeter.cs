@@ -22,16 +22,14 @@ public class Targeter : NetworkBehaviour
         // GameOverHandler.ServerOnGameOver -= ServerHandleGameOver;
     }
 
-    #region Server
-
-    [Command]
-    public void CmdSetTarget(GameObject targetGameObject)
+    public void SetTarget(GameObject targetGameObject)
     {
         if(!targetGameObject.TryGetComponent<Targetable>(out Targetable newTarget)) { return;}
         
         target = newTarget;
     }
 
+    #region Server
     [Server]
     public void clearTarget()
     {

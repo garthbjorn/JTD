@@ -41,7 +41,7 @@ public class Enemy : NetworkBehaviour
     {
         health.ServerOnDie += ServerHandleDie;
         ServerOnUnitSpawned?.Invoke(this);
-        targeter.CmdSetTarget(enemyTarget);
+        targeter.SetTarget(enemyTarget);
     }
 
     public override void OnStopServer()
