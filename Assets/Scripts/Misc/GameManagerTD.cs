@@ -8,7 +8,9 @@ public class GameManagerTD : NetworkBehaviour
     //public static event Action ServerOnGameOver;
     [SerializeField] private GameObject enemyPrefab = null;
     [SerializeField] private GameObject enemySpawnLocation = null;
-    [SerializeField] private GameObject enemyTarget = null;
+    [SerializeField] private GameObject enemyTarget = null; // The base
+    [SerializeField] private GameObject tower1 = null;
+
     public static event Action<string> ClientOnGameOver;
 
     // private List<UnitBase> bases = new List<UnitBase>();
@@ -34,9 +36,11 @@ public class GameManagerTD : NetworkBehaviour
             enemySpawnLocation.transform.position,
             enemySpawnLocation.transform.rotation);
 
+        // Target the base
         enemyInstance.GetComponent<Enemy>().GetComponent<UnitMovement>().enemyTarget = enemyTarget;
 
         NetworkServer.Spawn(enemyInstance);
+        tower1.GetComponent<Tower>().enemyTarget = enemyInstance;
         // UnitBase.ServerOnBaseSpawned += ServerHandleBaseSpawned;
         // UnitBase.ServerOnBaseDespawned += ServerHandleBaseDespawned;
 

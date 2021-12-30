@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
-public class Tower : MonoBehaviour
+public class Tower : NetworkBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Targeter targeter = null;
+    public GameObject enemyTarget = null;
+    public override void OnStartServer()
     {
-        
+        targeter.SetTarget(enemyTarget);
     }
-
-    // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        
+        if(enemyTarget == null)
+        {
+            // Debug.Log("Target is gone");
+        }
     }
 }
