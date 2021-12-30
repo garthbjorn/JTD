@@ -7,7 +7,7 @@ public class EnemyMovement : NetworkBehaviour
 {
     [SerializeField] private NavMeshAgent agent = null;
     public event Action<GameObject> ServerOnGoalReached;
-    public GameObject enemyTarget = null;
+    public GameObject goal = null;
 
 
     #region Server
@@ -26,7 +26,7 @@ public class EnemyMovement : NetworkBehaviour
     private void Update()
     {
 
-        if((transform.position.x == enemyTarget.transform.position.x) && (transform.position.z == enemyTarget.transform.position.z))
+        if((transform.position.x == goal.transform.position.x) && (transform.position.z == goal.transform.position.z))
         {
             agent.ResetPath();
             ServerOnGoalReached?.Invoke(gameObject);
@@ -34,7 +34,7 @@ public class EnemyMovement : NetworkBehaviour
         }
         if (!agent.hasPath)
         {
-            agent.SetDestination(enemyTarget.transform.position);
+            agent.SetDestination(goal.transform.position);
         }
         else
         {

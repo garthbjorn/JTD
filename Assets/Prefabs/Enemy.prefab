@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 7447888731050047134}
   - component: {fileID: -2680693344108574502}
   - component: {fileID: -5693790894455759448}
+  - component: {fileID: 3634297243240293449}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -202,7 +203,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   agent: {fileID: 57271592588001162}
-  enemyTarget: {fileID: 0}
+  goal: {fileID: 0}
 --- !u!114 &-2680693344108574502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,3 +233,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+--- !u!114 &3634297243240293449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104865350919767405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50ef096ca8bd2da46ad641957ebed187, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  aimAtPoint: {fileID: 104865350919767393}

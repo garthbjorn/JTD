@@ -9,13 +9,15 @@ public class Tower : NetworkBehaviour
     public GameObject enemyTarget = null;
     public override void OnStartServer()
     {
-        targeter.SetTarget(enemyTarget);
+
     }
     public void Update()
     {
-        if(enemyTarget == null)
+        if (enemyTarget != null)
         {
-            // Debug.Log("Target is gone");
+            targeter.SetTarget(enemyTarget);
+            //enemyTarget.TryGetComponent<Health>(out Health health);
+            //health.DealDamage(10);
         }
     }
 }

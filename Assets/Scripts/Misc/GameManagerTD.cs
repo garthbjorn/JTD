@@ -12,7 +12,7 @@ public class GameManagerTD : NetworkBehaviour
     [SerializeField] private List<GameObject> towersList = null;
 
     public static event Action<string> ClientOnGameOver;
-    private List<GameObject> currentEnemies = new List<GameObject>{};
+    private List<GameObject> currentEnemies = new List<GameObject> { };
 
     // private List<UnitBase> bases = new List<UnitBase>();
     int x = 0;
@@ -41,21 +41,27 @@ public class GameManagerTD : NetworkBehaviour
             enemySpawnLocation.transform.rotation);
 
         // Target the base
-        enemyInstance.GetComponent<Enemy>().GetComponent<EnemyMovement>().enemyTarget = goal;
+        enemyInstance.GetComponent<Enemy>().GetComponent<EnemyMovement>().goal = goal;
 
         NetworkServer.Spawn(enemyInstance);
         towersList[0].GetComponent<Tower>().enemyTarget = enemyInstance;
 
         enemyInstance.GetComponent<Enemy>().GetComponent<EnemyMovement>().ServerOnGoalReached += ServerHandleGoalReached;
+        enemyInstance.GetComponent<Enemy>().GetComponent<Health>().ServerOnDie += ServerHandleDie;
         currentEnemies.Add(enemyInstance);
     }
+
     [Server]
     private void ServerHandleGoalReached(GameObject gameObject)
     {
         currentEnemies.Remove(gameObject);
-        Debug.Log("point");
     }
-    
+
+    [Server]
+    private void ServerHandleDie(GameObject gameObject)
+    {
+        currentEnemies.Remove(gameObject);
+    }
     public override void OnStopServer()
     {
 

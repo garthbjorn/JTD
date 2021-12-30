@@ -42,7 +42,7 @@ public class Enemy : NetworkBehaviour
         NetworkServer.Destroy(gameObject);
     }
     [Server]
-    private void ServerHandleDie()
+    private void ServerHandleDie(GameObject gameObject)
     {
         NetworkServer.Destroy(gameObject);
     }
