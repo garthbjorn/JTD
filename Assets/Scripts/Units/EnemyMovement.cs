@@ -3,10 +3,10 @@ using Mirror;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class UnitMovement : NetworkBehaviour
+public class EnemyMovement : NetworkBehaviour
 {
     [SerializeField] private NavMeshAgent agent = null;
-    public event Action ServerOnDie;
+    public event Action<GameObject> ServerOnGoalReached;
     public GameObject enemyTarget = null;
 
 
@@ -29,8 +29,7 @@ public class UnitMovement : NetworkBehaviour
         if((transform.position.x == enemyTarget.transform.position.x) && (transform.position.z == enemyTarget.transform.position.z))
         {
             agent.ResetPath();
-            gameObject.GetComponent<Enemy>().endReached = true;
-            ServerOnDie?.Invoke();
+            ServerOnGoalReached?.Invoke(gameObject);
             return;
         }
         if (!agent.hasPath)

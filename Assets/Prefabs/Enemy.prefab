@@ -184,16 +184,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  resourceCost: 10
-  unitMovement: {fileID: 7447888731050047134}
+  enemyMovement: {fileID: 7447888731050047134}
   health: {fileID: -2680693344108574502}
   targeter: {fileID: -5693790894455759448}
-  onSelected:
-    m_PersistentCalls:
-      m_Calls: []
-  onDeselected:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &7447888731050047134
 MonoBehaviour:
   m_ObjectHideFlags: 0

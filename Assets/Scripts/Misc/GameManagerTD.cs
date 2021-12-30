@@ -8,28 +8,32 @@ public class GameManagerTD : NetworkBehaviour
     //public static event Action ServerOnGameOver;
     [SerializeField] private GameObject enemyPrefab = null;
     [SerializeField] private GameObject enemySpawnLocation = null;
-    [SerializeField] private GameObject enemyTarget = null; // The base
-    [SerializeField] private GameObject tower1 = null;
+    [SerializeField] private GameObject goal = null; // The base
+    [SerializeField] private List<GameObject> towersList = null;
 
     public static event Action<string> ClientOnGameOver;
+    private List<GameObject> currentEnemies = new List<GameObject>{};
 
     // private List<UnitBase> bases = new List<UnitBase>();
-
+    int x = 0;
     public void Update()
     {
-        // GameObject enemyInstance = Instantiate(
-        //     enemyPrefab,
-        //     enemySpawnLocation.transform.position,
-        //     enemySpawnLocation.transform.rotation);
-
-        // enemyInstance.GetComponent<Enemy>().enemyTarget = enemyTarget;
-
-        // NetworkServer.Spawn(enemyInstance);
+        if (x == 1000)
+        {
+            spawnEnemy();
+            x = 0;
+        }
+        x++;
     }
 
     #region Server
 
     public override void OnStartServer()
+    {
+
+    }
+
+    private void spawnEnemy()
     {
         GameObject enemyInstance = Instantiate(
             enemyPrefab,
@@ -37,40 +41,25 @@ public class GameManagerTD : NetworkBehaviour
             enemySpawnLocation.transform.rotation);
 
         // Target the base
-        enemyInstance.GetComponent<Enemy>().GetComponent<UnitMovement>().enemyTarget = enemyTarget;
+        enemyInstance.GetComponent<Enemy>().GetComponent<EnemyMovement>().enemyTarget = goal;
 
         NetworkServer.Spawn(enemyInstance);
-        tower1.GetComponent<Tower>().enemyTarget = enemyInstance;
-        // UnitBase.ServerOnBaseSpawned += ServerHandleBaseSpawned;
-        // UnitBase.ServerOnBaseDespawned += ServerHandleBaseDespawned;
+        towersList[0].GetComponent<Tower>().enemyTarget = enemyInstance;
 
+        enemyInstance.GetComponent<Enemy>().GetComponent<EnemyMovement>().ServerOnGoalReached += ServerHandleGoalReached;
+        currentEnemies.Add(enemyInstance);
     }
-
+    [Server]
+    private void ServerHandleGoalReached(GameObject gameObject)
+    {
+        currentEnemies.Remove(gameObject);
+        Debug.Log("point");
+    }
+    
     public override void OnStopServer()
     {
-        // UnitBase.ServerOnBaseSpawned -= ServerHandleBaseSpawned;
-        // UnitBase.ServerOnBaseDespawned -= ServerHandleBaseDespawned;
+
     }
-
-    [Server]
-    // private void ServerHandleBaseSpawned(UnitBase unitBase)
-    // {
-    //     bases.Add(unitBase);
-    // }
-
-    // [Server]
-    // private void ServerHandleBaseDespawned(UnitBase unitBase)
-    // {
-    //     bases.Remove(unitBase);
-
-    //     if(bases.Count != 1) {return;}
-
-    //     int playerID = bases[0].connectionToClient.connectionId;
-
-    //     RpcGameOver($"Player {playerID}");
-
-    //     ServerOnGameOver?.Invoke();
-    // }
 
     #endregion
 

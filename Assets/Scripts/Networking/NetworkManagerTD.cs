@@ -4,7 +4,7 @@ using Mirror;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class NetworkManagerRTS : NetworkManager
+public class NetworkManagerTD : NetworkManager
 {
     // [SerializeField] private GameOverHandler gameOverHandlerPrefab = null;
 
