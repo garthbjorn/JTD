@@ -1,3 +1,4 @@
+using System;
 using Mirror;
 using UnityEngine;
 using UnityEngine.AI;
@@ -5,8 +6,10 @@ using UnityEngine.AI;
 public class UnitMovement : NetworkBehaviour
 {
     [SerializeField] private NavMeshAgent agent = null;
-    [SerializeField] private Targeter targeter = null;
-    [SerializeField] private float chaseRange = 10f;
+    public event Action ServerOnDie;
+    public GameObject enemyTarget = null;
+
+
     #region Server
 
     public override void OnStartServer()
@@ -22,41 +25,22 @@ public class UnitMovement : NetworkBehaviour
     [ServerCallback]
     private void Update()
     {
-        Targetable target = targeter.GetTarget();
-        if(targeter.GetTarget() != null)
+
+        if((transform.position.x == enemyTarget.transform.position.x) && (transform.position.z == enemyTarget.transform.position.z))
         {
-            if(((target.transform.position - transform.position).sqrMagnitude) > (chaseRange * chaseRange))
-            {
-                agent.SetDestination(target.transform.position);
-            }
-            else if(agent.hasPath)
-            {
-                agent.ResetPath();
-            }
+            agent.ResetPath();
+            gameObject.GetComponent<Enemy>().endReached = true;
+            ServerOnDie?.Invoke();
             return;
         }
-
-        if(!agent.hasPath){return;}
-        
-        if(agent.remainingDistance > agent.stoppingDistance) {return;}
-
-        agent.ResetPath();
-    }
-
-    [Command]
-    public void CmdMove(Vector3 position)
-    {
-        ServerMove(position);
-    }
-
-    [Server]
-    public void ServerMove(Vector3 position)
-    {
-        targeter.clearTarget();
-        
-        if (!NavMesh.SamplePosition(position, out NavMeshHit hit, 1f, NavMesh.AllAreas)) { return; }
-
-        agent.SetDestination(hit.position);
+        if (!agent.hasPath)
+        {
+            agent.SetDestination(enemyTarget.transform.position);
+        }
+        else
+        {
+            return;
+        }
     }
 
     [Server]

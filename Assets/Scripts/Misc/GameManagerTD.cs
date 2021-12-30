@@ -15,20 +15,28 @@ public class GameManagerTD : NetworkBehaviour
 
     public void Update()
     {
-        GameObject enemyInstance = Instantiate(
-            enemyPrefab, 
-            enemySpawnLocation.transform.position, 
-            enemySpawnLocation.transform.rotation);
+        // GameObject enemyInstance = Instantiate(
+        //     enemyPrefab,
+        //     enemySpawnLocation.transform.position,
+        //     enemySpawnLocation.transform.rotation);
 
-            enemyInstance.GetComponent<Enemy>().enemyTarget = enemyTarget;
-            
-            NetworkServer.Spawn(enemyInstance);
+        // enemyInstance.GetComponent<Enemy>().enemyTarget = enemyTarget;
+
+        // NetworkServer.Spawn(enemyInstance);
     }
 
     #region Server
 
     public override void OnStartServer()
     {
+        GameObject enemyInstance = Instantiate(
+            enemyPrefab,
+            enemySpawnLocation.transform.position,
+            enemySpawnLocation.transform.rotation);
+
+        enemyInstance.GetComponent<Enemy>().GetComponent<UnitMovement>().enemyTarget = enemyTarget;
+
+        NetworkServer.Spawn(enemyInstance);
         // UnitBase.ServerOnBaseSpawned += ServerHandleBaseSpawned;
         // UnitBase.ServerOnBaseDespawned += ServerHandleBaseDespawned;
 

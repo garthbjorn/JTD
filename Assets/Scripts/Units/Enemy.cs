@@ -13,12 +13,13 @@ public class Enemy : NetworkBehaviour
     [SerializeField] private Targeter targeter = null;
     [SerializeField] private UnityEvent onSelected = null;
     [SerializeField] private UnityEvent onDeselected = null;
-    public GameObject enemyTarget = null;
     public static event Action<Enemy> ServerOnUnitSpawned;
     public static event Action<Enemy> ServerOnUnitDespawned;
 
     public static event Action<Enemy> AuthorityOnUnitSpawned;
     public static event Action<Enemy> AuthorityOnUnitDespawned;
+
+    public bool endReached = false;
 
     public int GetResourceCost()
     {
@@ -40,19 +41,25 @@ public class Enemy : NetworkBehaviour
     public override void OnStartServer()
     {
         health.ServerOnDie += ServerHandleDie;
+        unitMovement.ServerOnDie += ServerHandleDie;
         ServerOnUnitSpawned?.Invoke(this);
-        targeter.SetTarget(enemyTarget);
     }
 
     public override void OnStopServer()
     {
         health.ServerOnDie -= ServerHandleDie;
+        unitMovement.ServerOnDie -= ServerHandleDie;
         ServerOnUnitDespawned?.Invoke(this);
     }
 
     [Server]
     private void ServerHandleDie()
     {
+        if(endReached)
+        {
+            Debug.Log("Point Scored for the enemy!");
+            endReached = false;
+        }
         NetworkServer.Destroy(gameObject);
     }
     
