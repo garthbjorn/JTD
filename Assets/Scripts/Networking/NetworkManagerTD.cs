@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class NetworkManagerTD : NetworkManager
 {
-    // [SerializeField] private GameOverHandler gameOverHandlerPrefab = null;
+    [SerializeField] private GameOverHandler gameOverHandlerPrefab = null;
 
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
@@ -17,9 +17,9 @@ public class NetworkManagerTD : NetworkManager
     {
         if(SceneManager.GetActiveScene().name.StartsWith("Scene_Map"))
         {
-            // GameOverHandler gameOverHandlerInstance = Instantiate(gameOverHandlerPrefab);
+            GameOverHandler gameOverHandlerInstance = Instantiate(gameOverHandlerPrefab);
 
-            // NetworkServer.Spawn(gameOverHandlerInstance.gameObject);
+            NetworkServer.Spawn(gameOverHandlerInstance.gameObject);
 
         }
     }

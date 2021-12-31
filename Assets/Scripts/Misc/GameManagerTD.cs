@@ -24,7 +24,7 @@ public class GameManagerTD : NetworkBehaviour
     {
         if (x == 500)
         {
-            spawnEnemy();
+            //spawnEnemy();
             x = 0;
         }
         x++;
@@ -34,7 +34,7 @@ public class GameManagerTD : NetworkBehaviour
 
     public override void OnStartServer()
     {
-
+        
     }
 
     private void spawnEnemy()
