@@ -12,13 +12,17 @@ public class GameManagerTD : NetworkBehaviour
     [SerializeField] private List<GameObject> towersList = null;
 
     public static event Action<string> ClientOnGameOver;
+    public event Action<int> HandleEnemyGoal;
+
     private List<GameObject> currentEnemies = new List<GameObject> { };
 
     // private List<UnitBase> bases = new List<UnitBase>();
     int x = 0;
+    private int remainingLives = 20;
+
     public void Update()
     {
-        if (x == 1000)
+        if (x == 500)
         {
             spawnEnemy();
             x = 0;
@@ -54,7 +58,15 @@ public class GameManagerTD : NetworkBehaviour
     [Server]
     private void ServerHandleGoalReached(GameObject gameObject)
     {
+        remainingLives--;
+
+        HandleEnemyGoal?.Invoke(remainingLives);
         currentEnemies.Remove(gameObject);
+
+        if(remainingLives == 0)
+        {
+            // Game Over
+        }
     }
 
     [Server]
