@@ -10,6 +10,8 @@ public class Enemy : NetworkBehaviour
     [SerializeField] private EnemyMovement enemyMovement = null;
     [SerializeField] private Health health = null;
     [SerializeField] private Targeter targeter = null;
+    [SerializeField] private UnityEvent onSelected = null;
+    [SerializeField] private UnityEvent onDeselected = null;
 
 
     public EnemyMovement GetEnemyMovement()
@@ -21,6 +23,19 @@ public class Enemy : NetworkBehaviour
     {
         return targeter;
     }
+    #region Client
+
+    [Client]
+    public void Select()
+    {
+        onSelected?.Invoke();
+    }
+    [Client]
+    public void Deselect()
+    {
+        onDeselected?.Invoke();
+    }
+    #endregion
 
     #region Server
 
@@ -46,6 +61,6 @@ public class Enemy : NetworkBehaviour
     {
         NetworkServer.Destroy(gameObject);
     }
-    
+
     #endregion
 }

@@ -190,7 +190,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playerCameraTransform: {fileID: 7127726605633037649}
-  speed: 20
+  speed: 30
   screenBorderThickness: 10
   screenXLimits: {x: -45, y: 45}
   screenZLimits: {x: -45, y: 45}

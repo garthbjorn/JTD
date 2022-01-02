@@ -28,7 +28,7 @@ public class GameManagerTD : NetworkBehaviour
 
     public override void OnStartServer()
     {
-
+        spawnEnemy();
     }
 
     private void spawnEnemy()
