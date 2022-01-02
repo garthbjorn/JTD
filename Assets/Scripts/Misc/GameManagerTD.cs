@@ -17,24 +17,18 @@ public class GameManagerTD : NetworkBehaviour
     private List<GameObject> currentEnemies = new List<GameObject> { };
 
     // private List<UnitBase> bases = new List<UnitBase>();
-    int x = 0;
     private int remainingLives = 20;
 
     public void Update()
     {
-        if (x == 500)
-        {
-            //spawnEnemy();
-            x = 0;
-        }
-        x++;
+
     }
 
     #region Server
 
     public override void OnStartServer()
     {
-        
+
     }
 
     private void spawnEnemy()

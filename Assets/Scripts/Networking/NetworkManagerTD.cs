@@ -36,6 +36,7 @@ public class NetworkManagerTD : NetworkManager
     }
     public void StartGame()
     {
+        Debug.Log("NetworkManagerTD Start");
         isGameInProgress = true;
         ServerChangeScene("Scene_Map_01");
     }
@@ -46,6 +47,8 @@ public class NetworkManagerTD : NetworkManager
         PlayerTD player = conn.identity.GetComponent<PlayerTD>();
 
         players.Add(player);
+
+        player.SetDisplayName($"Player {players.Count}");
 
         player.SetPartyOwner(players.Count == 1);
     }
