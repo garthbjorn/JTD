@@ -814,6 +814,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NetworkManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5769002572596239334, guid: b4ef039ae9b3c924d9f38fcddfb33748, type: 3}
+      propertyPath: transport
+      value: 
+      objectReference: {fileID: 227354315}
     - target: {fileID: 5769002572596239335, guid: b4ef039ae9b3c924d9f38fcddfb33748, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -860,6 +864,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4ef039ae9b3c924d9f38fcddfb33748, type: 3}
+--- !u!114 &227354315 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6335522202516455159, guid: b4ef039ae9b3c924d9f38fcddfb33748, type: 3}
+  m_PrefabInstance: {fileID: 227354312}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6e55fca1f4e4844593a3dd65a3ecb39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &263328732
 GameObject:
   m_ObjectHideFlags: 0
@@ -2173,6 +2188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   landingPagePanel: {fileID: 295036602}
+  useSteam: 1
 --- !u!1 &534318777
 GameObject:
   m_ObjectHideFlags: 0
